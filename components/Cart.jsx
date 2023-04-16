@@ -14,7 +14,7 @@ import getStripe from '../lib/getStripe';
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
-
+import Date from './Date';
 
 const Cart = () => {
   const router = useRouter();
@@ -64,6 +64,7 @@ const Cart = () => {
           <span className="heading">Your Cart</span>
           <span className="cart-num-items">({totalQuantities} items)</span>
         </button>
+        <Date/>
         {cartItems.length < 1 && (
           <div className="empty-cart">
             <AiOutlineShopping size={150} />
