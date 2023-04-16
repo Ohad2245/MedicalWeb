@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { AiOutlineShopping } from "react-icons/ai";
+import {CgPill} from "react-icons/cg";
 import { Cart } from "./";
 import { useStateContext } from "../context/StateContext";
 import { useRouter } from "next/router";
@@ -16,7 +16,7 @@ const Navbar = () => {
      
       {router.pathname === '/SignIn' || router.pathname !== '/' && (
         <><p className="logo">
-          <Link href="/Home">Medical Web</Link>
+          <Link href="/Home">IHealth</Link>
         </p><button
           type="button"
           className="cart-icon"
@@ -24,7 +24,7 @@ const Navbar = () => {
             setShowCart(true);
           } }
         >
-            <AiOutlineShopping />
+            <CgPill />
             <span className="cart-item-qty">{totalQuantities}</span>
 
           </button></>
