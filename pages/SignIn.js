@@ -4,48 +4,45 @@ import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { BiUser } from "react-icons/bi";
-import { AiFillLock, AiOutlineMail } from "react-icons/ai";
+import { AiFillLock } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 
-const SignUp = () => {
+const SignIn = () => {
   const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signUp = (e) => {
+  const signIn = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
-        router.push("/SignIn");
-        toast.success("User sign Up:");
-
+        console.log("User signed in:", userCredential.user);
+        router.push("/Home");
+        toast.success("User sign in:",userCredential.user);
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("User sign Up Failed:");
+        console.log("Error signing in:", error);
+        toast.error("User sign in failed:");
 
+        
       });
   };
-
   return (
     <div className="container">
-      <div className="form signup">
-          <h1 style={{color:'white'}}>Create Account</h1>
-          <div className="inputBox">
+      <form className="form">
+        <h1 style={{color:'white'}}>Sign In</h1>
+        <div className="inputBox">
           <input
             type="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-           <i>
-              <AiOutlineMail />
-            </i>
-            <span>Email</span>
+          <i>
+            <BiUser />
+          </i>
+          <span>Username</span>
         </div>
-
         <div className="inputBox">
           <input
             type="password"
@@ -54,20 +51,18 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <i>
-          <AiFillLock />
-            </i>
-            <span>Username</span>
-            </div>
-
-        <button  className="btn" onClick={signUp}>Sign Up</button>
-        <p>
-            Already a member ? <a href="SignIn">Log in</a>
-          </p>
-      </div>
-      </div>
-    
-
+            <AiFillLock />
+          </i>
+          <span>Password</span>
+        </div>
+        <button className="btn" onClick={signIn}>Sign In</button>
+      <p>
+        Not Registered ? <a href="/">Create a new account</a>
+      </p>
+      </form>
+     
+    </div>
   );
 };
 
-export default SignUp;
+export default SignIn;

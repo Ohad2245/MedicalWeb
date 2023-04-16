@@ -11,8 +11,19 @@ import { useStateContext } from "../context/StateContext";
 import Link from "next/link";
 import { urlFor } from "../lib/client";
 import getStripe from '../lib/getStripe';
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
+
 
 const Cart = () => {
+  const router = useRouter();
+  const userSignOut = () =>{
+    signOut(auth).then(()=>{
+      console.log('sign out');
+      router.push('/SignIn')
+    }).catch(error => console.log(error));
+  }
   const cartRef = useRef();
   const {
     totalPrice,
@@ -40,8 +51,10 @@ const Cart = () => {
   }
 
   return (
-    <div className="cart-wrapper" ref={cartRef}>
+    
+      <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
+      <button className="signOut" onClick={userSignOut}>SignOut</button>
         <button
           type="button"
           className="cart-heading"
@@ -55,7 +68,7 @@ const Cart = () => {
           <div className="empty-cart">
             <AiOutlineShopping size={150} />
             <h3>Your shopping bag is empty</h3>
-            <Link href="/">
+            <Link href="/Home">
               <button
                 type="button"
                 onClick={() => setShowCart(false)}

@@ -23,7 +23,6 @@ const FooterBanner = ({footerBanner:{discount,largeText1,largeText2,desc,saleTim
           </Link>
         </div>
 
-        <img src={urlFor(image)} className="footer-banner-image"/>
       </div>
     </div>
   )
