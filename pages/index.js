@@ -1,5 +1,6 @@
 import React from "react";
-import {HeroBanner} from '../components';
+import { Product, FooterBanner, HeroBanner } from '../components';
+
 
 import {client} from '../lib/client';
 const Home = ({products,bannerData}) => {
@@ -12,8 +13,9 @@ const Home = ({products,bannerData}) => {
         <p>Pills top the kill head</p>
       </div>
       <div className="products-container">
-        {products?.map((product) => product.name)}
+        {products?.map((product) => <Product key={product._id} product={product}/>)}
       </div>
+      <FooterBanner footerBanner={bannerData && bannerData[0]}/>
     </>
   );
 };
